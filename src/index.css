@@ -1,0 +1,130 @@
+:root {
+  /* CareFur Brand */
+  --carefur-green: #174747;
+  --carefur-green-dark: #103c3d;
+  --carefur-green-soft: #e7efea;
+
+  --carefur-beige: #e2e4ca;
+  --carefur-beige-dark: #8a9554;
+
+  /* Background */
+  --carefur-background: #f8faf6;
+  --carefur-surface: #ffffff;
+
+  /* Text */
+  --carefur-text: #173c3e;
+  --carefur-muted: #6b7d7e;
+
+  /* Borders */
+  --carefur-border: #d7ddd8;
+
+  /* Status */
+  --carefur-success: #16952d;
+  --carefur-success-bg: #e7f7e9;
+
+  --carefur-danger: #d92534;
+  --carefur-danger-bg: #fdebed;
+
+  --carefur-warning: #956500;
+  --carefur-warning-bg: #fff6df;
+
+
+  /* Typography */
+  --font-main:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+
+
+  font-family: var(--font-main);
+
+  color: var(--carefur-text);
+
+  background: var(--carefur-background);
+
+  font-synthesis: none;
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+
+  margin:0;
+
+  min-height:100%;
+
+}
+
+
+body {
+
+  background:
+    var(--carefur-background);
+
+  color:
+    var(--carefur-text);
+
+}
+
+
+/* React root */
+
+#root {
+
+  min-height:100vh;
+
+}
+
+
+/* Global elements */
+
+button,
+input,
+textarea,
+select {
+
+  font:inherit;
+
+}
+
+
+button {
+
+  cursor:pointer;
+
+}
+
+
+img {
+
+  max-width:100%;
+
+  display:block;
+
+}
+
+
+h1,
+h2,
+h3,
+p {
+
+  margin:0;
+
+}

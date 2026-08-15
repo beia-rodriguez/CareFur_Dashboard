@@ -1,0 +1,726 @@
+.boarding-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 12px 32px;
+  color: var(--carefur-text, #183332);
+}
+
+/* Header */
+
+.boarding-header {
+  margin-bottom: 20px;
+}
+
+.boarding-header p {
+  margin: 0 0 4px;
+  color: var(--carefur-green, #155653);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.boarding-header h1 {
+  margin: 0;
+  color: var(--carefur-green, #155653);
+  font-size: 1.65rem;
+  line-height: 1.15;
+}
+
+.boarding-header span {
+  display: block;
+  margin-top: 6px;
+  color: var(--carefur-muted, #667977);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+/* Main step container */
+
+.boarding-step {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 3%);
+}
+
+.boarding-step-count {
+  margin: 0 0 10px;
+  color: var(--carefur-green, #155653);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.boarding-step h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.boarding-step h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.boarding-step h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.boarding-description {
+  margin: 8px 0 0;
+  color: var(--carefur-muted, #667977);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+/* Errors and status messages */
+
+.customer-error {
+  margin: 0 0 14px;
+  padding: 11px 12px;
+  border: 1px solid rgb(190 54 54 / 15%);
+  border-radius: 9px;
+  background: var(--carefur-danger-bg, #fde8e8);
+  color: var(--carefur-danger, #b92d2d);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.boarding-step [role="status"] {
+  margin: 14px 0 0;
+  color: var(--carefur-muted, #667977);
+  font-size: 0.8rem;
+}
+
+/* Forms */
+
+.boarding-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.boarding-fields label,
+.customer-modal label {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.boarding-page input,
+.boarding-page select,
+.boarding-page textarea,
+.customer-modal input,
+.customer-modal select,
+.customer-modal textarea,
+.boarding-search {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  color: var(--carefur-text, #183332);
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 10px;
+  outline: none;
+  background: #ffffff;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.boarding-page input,
+.boarding-page select,
+.customer-modal input,
+.customer-modal select,
+.boarding-search {
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.boarding-page textarea,
+.customer-modal textarea {
+  min-height: 90px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.boarding-page input:focus,
+.boarding-page select:focus,
+.boarding-page textarea:focus,
+.customer-modal input:focus,
+.customer-modal select:focus,
+.customer-modal textarea:focus,
+.boarding-search:focus {
+  border-color: var(--carefur-green, #155653);
+  box-shadow: 0 0 0 3px rgb(21 86 83 / 12%);
+}
+
+.boarding-page input:disabled,
+.boarding-page select:disabled,
+.boarding-page textarea:disabled {
+  cursor: not-allowed;
+  background: #f2f4f3;
+  color: var(--carefur-muted, #667977);
+}
+
+.boarding-search {
+  margin-top: 16px;
+}
+
+/* Shared cards */
+
+.pet-list,
+.room-list,
+.owner-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pet-card,
+.room-card,
+.owner-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  padding: 15px;
+  color: var(--carefur-text, #183332);
+  text-align: left;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.pet-card:hover:not(:disabled),
+.room-card:hover:not(:disabled),
+.owner-card:hover:not(:disabled) {
+  border-color: var(--carefur-green, #155653);
+}
+
+.pet-card:focus-visible,
+.room-card:focus-visible,
+.owner-card:focus-visible,
+.boarding-next:focus-visible,
+.boarding-back:focus-visible,
+.boarding-new-button:focus-visible,
+.customer-modal-actions button:focus-visible {
+  outline: 3px solid rgb(21 86 83 / 20%);
+  outline-offset: 2px;
+}
+
+.pet-card-selected,
+.room-card-selected,
+.owner-card-selected {
+  border-color: var(--carefur-green, #155653);
+  background: var(--carefur-green-soft, #eef7f6);
+  box-shadow: 0 0 0 1px var(--carefur-green, #155653);
+}
+
+.pet-card strong,
+.room-card strong,
+.owner-card strong {
+  overflow-wrap: anywhere;
+  color: var(--carefur-green, #155653);
+}
+
+.pet-card span,
+.room-card span,
+.owner-card span {
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+}
+
+.pet-card small,
+.room-card small,
+.owner-card small {
+  overflow-wrap: anywhere;
+  color: var(--carefur-muted, #667977);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+/* Room availability */
+
+.room-card {
+  gap: 7px;
+}
+
+.room-card:disabled {
+  cursor: not-allowed;
+}
+
+.room-card-unavailable {
+  border-color: #e2e4e3;
+  background: #f5f6f6;
+  opacity: 0.72;
+}
+
+.room-card-unavailable:hover {
+  border-color: #e2e4e3;
+  transform: none;
+}
+
+.room-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.room-card-header strong {
+  flex: 1;
+  min-width: 0;
+}
+
+.room-availability {
+  flex: 0 0 auto;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.room-availability-available {
+  color: #12633d;
+  background: #dff5e8;
+}
+
+.room-availability-unavailable {
+  color: #992c2c;
+  background: #f7dddd;
+}
+
+.room-availability-message {
+  display: block;
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+/* Selected pet */
+
+.selected-pet-card {
+  margin-top: 18px;
+  padding: 15px;
+  border: 1px solid var(--carefur-green, #155653);
+  border-radius: 12px;
+  background: var(--carefur-green-soft, #eef7f6);
+}
+
+.selected-pet-card strong {
+  display: block;
+  color: var(--carefur-green, #155653);
+  font-size: 1.05rem;
+}
+
+.selected-pet-card p {
+  margin: 5px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+/* Feeding section */
+
+.feeding-methods {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.feeding-method-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+.feeding-method-option:has(input:checked) {
+  border-color: var(--carefur-green, #155653);
+  background: var(--carefur-green-soft, #eef7f6);
+}
+
+.feeding-method-option input {
+  width: auto;
+  min-height: auto;
+  margin-top: 2px;
+}
+
+.feeding-schedules {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.feeding-schedule-card {
+  padding: 15px;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 12px;
+  background: #fafbfa;
+}
+
+.feeding-schedule-card h3,
+.feeding-schedule-card h4 {
+  margin-bottom: 12px;
+  color: var(--carefur-green, #155653);
+}
+
+.feeding-schedule-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+/* Review step */
+
+.boarding-review {
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.boarding-review__section {
+  padding: 15px;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 12px;
+  background: #fafbfa;
+}
+
+.boarding-review__section h3 {
+  margin-bottom: 12px;
+  color: var(--carefur-green, #155653);
+}
+
+.boarding-review__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e8eceb;
+}
+
+.boarding-review__row:last-child {
+  border-bottom: 0;
+}
+
+.boarding-review__row span {
+  color: var(--carefur-muted, #667977);
+  font-size: 0.75rem;
+}
+
+.boarding-review__row strong {
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.boarding-review__schedule {
+  margin-top: 14px;
+  padding: 13px;
+  border: 1px solid var(--carefur-border, #d7dedc);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.boarding-review__schedule h4 {
+  margin-bottom: 6px;
+  color: var(--carefur-green, #155653);
+}
+
+/* Booking success and access code */
+
+.boarding-success {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--carefur-green, #155653);
+  border-radius: 12px;
+  background: var(--carefur-green-soft, #eef7f6);
+}
+
+.boarding-access-code {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  border: 1px dashed var(--carefur-green, #155653);
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.boarding-access-code span {
+  color: var(--carefur-muted, #667977);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.boarding-access-code strong {
+  overflow-wrap: anywhere;
+  color: var(--carefur-green, #155653);
+  font-size: 1.7rem;
+  letter-spacing: 0.12em;
+}
+
+/* Buttons and actions */
+
+.boarding-actions,
+.customer-modal-actions {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.boarding-actions button,
+.customer-modal-actions button,
+.boarding-new-button,
+.owner-search-row button {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.boarding-next,
+.owner-search-row button {
+  border: 0;
+  background: var(--carefur-green, #155653);
+  color: #ffffff;
+}
+
+.boarding-next:hover:not(:disabled),
+.owner-search-row button:hover:not(:disabled) {
+  background: var(--carefur-green-dark, #0d4441);
+}
+
+.boarding-back {
+  border: 1px solid var(--carefur-border, #d7dedc);
+  background: #ffffff;
+  color: var(--carefur-text, #183332);
+}
+
+.boarding-back:hover:not(:disabled) {
+  background: #f3f5f3;
+}
+
+.boarding-new-button {
+  margin-top: 16px;
+  border: 1px solid var(--carefur-green, #155653);
+  background: #ffffff;
+  color: var(--carefur-green, #155653);
+}
+
+.boarding-new-button:hover:not(:disabled) {
+  background: var(--carefur-green-soft, #eef7f6);
+}
+
+.boarding-actions button:disabled,
+.customer-modal-actions button:disabled,
+.boarding-new-button:disabled,
+.owner-search-row button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Owner search */
+
+.owner-search-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.owner-search-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Customer modal */
+
+.customer-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 12px;
+  background: rgb(0 0 0 / 45%);
+}
+
+.customer-modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 18px;
+  border-radius: 16px 16px 0 0;
+  background: #ffffff;
+  box-shadow: 0 -8px 30px rgb(0 0 0 / 14%);
+}
+
+.customer-modal h2 {
+  margin: 0 0 16px;
+  color: var(--carefur-green, #155653);
+}
+
+.customer-modal h3 {
+  margin: 18px 0 10px;
+  font-size: 0.9rem;
+}
+
+/* Tablet */
+
+@media (min-width: 600px) {
+  .boarding-page {
+    padding: 20px 18px 40px;
+  }
+
+  .boarding-step {
+    padding: 20px;
+  }
+
+  .boarding-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .boarding-actions,
+  .customer-modal-actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .boarding-actions button,
+  .customer-modal-actions button {
+    width: auto;
+    min-width: 130px;
+  }
+
+  .boarding-next {
+    min-width: 170px;
+  }
+
+  .owner-search-row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .owner-search-row button {
+    width: auto;
+    min-width: 100px;
+  }
+
+  .customer-modal-backdrop {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .customer-modal {
+    padding: 22px;
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgb(0 0 0 / 18%);
+  }
+
+  .boarding-review__row {
+    grid-template-columns: minmax(120px, 0.7fr) minmax(0, 1.3fr);
+    align-items: start;
+    gap: 16px;
+  }
+
+  .boarding-review__row strong {
+    text-align: right;
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+  .boarding-page {
+    padding: 24px 20px 48px;
+  }
+
+  .boarding-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pet-list,
+  .room-list,
+  .owner-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feeding-methods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feeding-schedule-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boarding-review {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .boarding-success {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 960px) {
+  .boarding-step {
+    padding: 24px;
+  }
+
+  .room-card:hover:not(:disabled),
+  .pet-card:hover:not(:disabled),
+  .owner-card:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgb(0 0 0 / 5%);
+  }
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-card,
+  .room-card,
+  .owner-card,
+  .boarding-next,
+  .boarding-back,
+  .boarding-new-button {
+    transition: none;
+  }
+}

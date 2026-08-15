@@ -1,0 +1,36 @@
+.dashboard-layout {
+  min-height: 100vh;
+  background: #f7f8f4;
+}
+
+.dashboard-main {
+  min-width: 0;
+}
+
+.dashboard-content {
+  padding: 16px;
+}
+
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  border: 0;
+  background: rgb(0 0 0 / 40%);
+}
+
+/* Tablet and desktop */
+@media (min-width: 768px) {
+  .dashboard-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+  }
+
+  .dashboard-content {
+    padding: 24px;
+  }
+
+  .dashboard-overlay {
+    display: none;
+  }
+}

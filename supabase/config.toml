@@ -1,0 +1,11 @@
+[functions.create-staff]
+enabled = true
+verify_jwt = true
+import_map = "./functions/create-staff/deno.json"
+entrypoint = "./functions/create-staff/index.js"
+
+[functions.create-booking]
+enabled = true
+verify_jwt = true
+import_map = "./functions/create-booking/deno.json"
+entrypoint = "./functions/create-booking/index.js"
