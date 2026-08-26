@@ -5,39 +5,53 @@ import {
 } from "react-router-dom";
 
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+
 import DashboardLayout from "./components/layout/DashboardLayout";
 
 import Login from "./pages/Login";
+
 import Dashboard from "./pages/Dashboard";
+
 import NewBoarding from "./pages/NewBoarding";
+
 import Pets from "./pages/Pets";
+
 import Rooms from "./pages/Rooms";
+
 import FeedingSchedule from "./pages/FeedingSchedule";
 
-import AdminRoute from "./components/auth/AdminRoute";
-import StaffManagement from "./pages/StaffManagement";
+import Messages from "./pages/Messages";
 
+import AdminRoute from "./components/auth/AdminRoute";
+
+import StaffManagement from "./pages/StaffManagement";
 
 export default function App() {
   return (
     <Routes>
+      {/* PUBLIC */}
 
-      {/* Public Route */}
       <Route
         path="/login"
-        element={<Login />}
+        element={
+          <Login />
+        }
       />
 
+      {/* PROTECTED */}
 
-      {/* Protected Routes */}
       <Route
         element={
-          <ProtectedRoute allowedRoles={["admin", "staff"]}>
+          <ProtectedRoute
+            allowedRoles={[
+              "admin",
+              "staff",
+            ]}
+          >
             <DashboardLayout />
           </ProtectedRoute>
         }
       >
-
         <Route
           index
           element={
@@ -48,12 +62,16 @@ export default function App() {
           }
         />
 
+        {/* DASHBOARD */}
 
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+            <Dashboard />
+          }
         />
 
+        {/* STAFF MANAGEMENT */}
 
         <Route
           path="/staff"
@@ -64,30 +82,54 @@ export default function App() {
           }
         />
 
+        {/* NEW BOARDING */}
+
         <Route
           path="/boarding/new"
-          element={<NewBoarding />}
+          element={
+            <NewBoarding />
+          }
         />
+
+        {/* PETS */}
 
         <Route
           path="/pets"
-          element={<Pets />}
+          element={
+            <Pets />
+          }
         />
+
+        {/* ROOMS */}
 
         <Route
           path="/rooms"
-          element={<Rooms />}
+          element={
+            <Rooms />
+          }
         />
+
+        {/* FEEDING */}
 
         <Route
           path="/feeding-schedules"
-          element={<FeedingSchedule />}
+          element={
+            <FeedingSchedule />
+          }
         />
 
+        {/* MESSAGES */}
+
+        <Route
+          path="/messages"
+          element={
+            <Messages />
+          }
+        />
       </Route>
 
+      {/* UNKNOWN */}
 
-      {/* Redirect unknown routes */}
       <Route
         path="*"
         element={
@@ -97,7 +139,6 @@ export default function App() {
           />
         }
       />
-
     </Routes>
   );
 }

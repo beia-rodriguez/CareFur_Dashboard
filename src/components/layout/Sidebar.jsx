@@ -49,6 +49,10 @@ const navigation = [
         to: "/cameras",
       },
       {
+        label: "Messages",
+        to: "/messages",
+      },
+      {
         label: "Alerts",
         to: "/alerts",
       },
@@ -82,7 +86,6 @@ export default function Sidebar({
   isOpen,
   onClose,
 }) {
-
   const {
     logout,
     profile,
@@ -91,33 +94,24 @@ export default function Sidebar({
 
 
   async function handleLogout() {
-
     try {
-
       await logout();
-
     } catch (error) {
-
       console.error(
         "Logout failed:",
         error
       );
-
     }
-
   }
 
 
   return (
-
     <aside
       className={`sidebar ${
         isOpen ? "sidebar-open" : ""
       }`}
     >
-
       <div className="sidebar-header">
-
         <div>
           <strong>
             CareFur
@@ -128,7 +122,6 @@ export default function Sidebar({
           </p>
         </div>
 
-
         <button
           type="button"
           className="sidebar-close"
@@ -137,30 +130,22 @@ export default function Sidebar({
         >
           ×
         </button>
-
       </div>
 
 
       <nav className="sidebar-nav">
-
         {navigation.map((group) => (
-
           <div
             key={group.title || "main"}
             className="sidebar-group"
           >
-
             {group.title && (
-
               <p className="sidebar-group-title">
                 {group.title}
               </p>
-
             )}
 
-
             {group.items.map((item) => {
-
               if (
                 item.adminOnly &&
                 !isAdmin
@@ -168,9 +153,7 @@ export default function Sidebar({
                 return null;
               }
 
-
               return (
-
                 <NavLink
                   key={item.to}
                   to={item.to}
@@ -189,15 +172,10 @@ export default function Sidebar({
                 >
                   {item.label}
                 </NavLink>
-
               );
-
             })}
-
           </div>
-
         ))}
-
       </nav>
 
 
@@ -208,10 +186,6 @@ export default function Sidebar({
       >
         Log out
       </button>
-
-
     </aside>
-
   );
-
 }
