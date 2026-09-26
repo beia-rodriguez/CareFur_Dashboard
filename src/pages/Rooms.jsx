@@ -1,89 +1,66 @@
-import React, { useState } from "react";
+import { ArrowClockwise, Camera, House, WifiHigh } from "@phosphor-icons/react";
+import { useMemo, useState } from "react";
+import Badge from "../components/common/Badge";
+import Button from "../components/common/Button";
+import EmptyState from "../components/common/EmptyState";
+import PageHeader from "../components/common/PageHeader";
 import useRooms from "../hooks/useRooms";
 import "./Rooms.css";
+
+const filters = ["all", "active", "maintenance", "inactive"];
 
 export default function Rooms() {
   const { rooms, loading, error, refetchRooms } = useRooms();
   const [filterStatus, setFilterStatus] = useState("all");
 
-  const filteredRooms = rooms.filter((room) => {
-    if (filterStatus === "all") return true;
-    return room.status === filterStatus;
-  });
+  const filteredRooms = useMemo(
+    () => rooms.filter((room) => filterStatus === "all" || room.status === filterStatus),
+    [rooms, filterStatus],
+  );
 
   return (
     <section className="rooms-page">
-      <header className="rooms-page-header">
-        <div>
-          <p>CareFur</p>
-          <h1>Rooms</h1>
-          <span>Manage hotel rooms & assigned hardware</span>
-        </div>
-        <button className="add-room-btn" onClick={() => alert("Add Room Modal")}>
-          + Add Room
-        </button>
-      </header>
+      <PageHeader
+        title="Rooms"
+        description="Monitor room availability and assigned CareFur hardware."
+        actions={<Button variant="secondary" onClick={refetchRooms}><ArrowClockwise size={17} /> Refresh</Button>}
+      />
 
-      {/* Filter Tabs */}
-      <div className="rooms-filter-bar">
-        {["all", "active", "maintenance", "inactive"].map((status) => (
-          <button
-            key={status}
-            className={`filter-tab ${filterStatus === status ? "active" : ""}`}
-            onClick={() => setFilterStatus(status)}
-          >
+      <div className="segmented-control" aria-label="Room status filter">
+        {filters.map((status) => (
+          <button key={status} type="button" className={filterStatus === status ? "active" : ""} onClick={() => setFilterStatus(status)}>
             {status}
           </button>
         ))}
       </div>
 
-      {error && <p className="error-message">{error}</p>}
+      {error && <div className="page-alert page-alert--error">{error}</div>}
 
       {loading ? (
-        <p>Loading rooms...</p>
+        <div className="page-loading">Loading rooms…</div>
+      ) : filteredRooms.length === 0 ? (
+        <EmptyState icon={House} title="No rooms in this view" message="Choose another status or refresh the room list." />
       ) : (
         <div className="rooms-grid">
           {filteredRooms.map((room) => {
-            const feeder = room.devices?.find((d) => d.device_type === "feeder");
-            const camera = room.devices?.find((d) => d.device_type === "camera");
-
+            const feeder = room.devices?.find((device) => device.device_type === "feeder");
+            const camera = room.devices?.find((device) => device.device_type === "camera");
             return (
-              <article key={room.id} className="room-card">
-                <div className="room-card-header">
+              <article key={room.id} className="room-panel">
+                <div className="room-panel__header">
+                  <div className="room-number"><House size={20} weight="duotone" /></div>
                   <div>
                     <h2>Room {room.room_number}</h2>
-                    <p>{room.room_name || "Standard Suite"}</p>
+                    <p>{room.room_name || "Pet suite"}</p>
                   </div>
-                  <span className={`status-badge status-${room.status}`}>
-                    {room.status}
-                  </span>
+                  <Badge tone={getRoomTone(room.status)}>{room.status}</Badge>
                 </div>
 
-                <div className="room-details">
-                  <small>Capacity: {room.capacity} Pet(s)</small>
-                </div>
+                <div className="room-capacity">Capacity <strong>{room.capacity || 1} pet{room.capacity === 1 ? "" : "s"}</strong></div>
 
-                <div className="hardware-section">
-                  <span className="section-label">Assigned IoT Devices</span>
-                  
-                  <div className="device-row">
-                    <span>Feeder:</span>
-                    <strong>{feeder ? feeder.device_code : "None"}</strong>
-                  </div>
-
-                  <div className="device-row">
-                    <span>Camera:</span>
-                    <strong>{camera ? camera.device_code : "None"}</strong>
-                  </div>
-                </div>
-
-                <div className="room-card-actions">
-                  <button onClick={() => alert(`Manage devices for Room ${room.room_number}`)}>
-                    Devices
-                  </button>
-                  <button onClick={() => alert(`Edit Room ${room.room_number}`)}>
-                    Edit
-                  </button>
+                <div className="device-list">
+                  <DeviceRow icon={WifiHigh} label="Feeder" device={feeder} />
+                  <DeviceRow icon={Camera} label="Camera" device={camera} />
                 </div>
               </article>
             );
@@ -92,4 +69,22 @@ export default function Rooms() {
       )}
     </section>
   );
+}
+
+function DeviceRow({ icon: Icon, label, device }) {
+  return (
+    <div className="device-row">
+      <Icon size={18} weight="duotone" />
+      <span>{label}</span>
+      <strong>{device?.device_code || "Not assigned"}</strong>
+      <span className={`device-dot ${device?.status === "active" ? "online" : ""}`} title={device?.status || "unassigned"} />
+    </div>
+  );
+}
+
+function getRoomTone(status) {
+  if (status === "active") return "success";
+  if (status === "maintenance") return "warning";
+  if (status === "inactive") return "neutral";
+  return "info";
 }

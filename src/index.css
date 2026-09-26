@@ -1,130 +1,46 @@
-:root {
-  /* CareFur Brand */
-  --carefur-green: #174747;
-  --carefur-green-dark: #103c3d;
-  --carefur-green-soft: #e7efea;
-
-  --carefur-beige: #e2e4ca;
-  --carefur-beige-dark: #8a9554;
-
-  /* Background */
-  --carefur-background: #f8faf6;
-  --carefur-surface: #ffffff;
-
-  /* Text */
-  --carefur-text: #173c3e;
-  --carefur-muted: #6b7d7e;
-
-  /* Borders */
-  --carefur-border: #d7ddd8;
-
-  /* Status */
-  --carefur-success: #16952d;
-  --carefur-success-bg: #e7f7e9;
-
-  --carefur-danger: #d92534;
-  --carefur-danger-bg: #fdebed;
-
-  --carefur-warning: #956500;
-  --carefur-warning-bg: #fff6df;
-
-
-  /* Typography */
-  --font-main:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
-
-
-  font-family: var(--font-main);
-
-  color: var(--carefur-text);
-
-  background: var(--carefur-background);
-
-  font-synthesis: none;
-
-  text-rendering: optimizeLegibility;
-
-  -webkit-font-smoothing: antialiased;
-
-  -moz-osx-font-smoothing: grayscale;
+:root{
+  --carefur-green:#0e5553;
+  --carefur-green-dark:#0b403f;
+  --carefur-green-soft:#e8f2ef;
+  --carefur-accent:#9a7d38;
+  --carefur-cream:#eee8ca;
+  --carefur-cream-soft:#faf8ec;
+  --carefur-cream-border:#e7dfb9;
+  --carefur-beige:#eee8ca;
+  --carefur-background:#f7f8f3;
+  --carefur-surface:#ffffff;
+  --carefur-text:#173e3e;
+  --carefur-muted:#6c7f7d;
+  --carefur-border:#dce5df;
+  --carefur-success:#20783c;
+  --carefur-success-bg:#e8f6ec;
+  --carefur-danger:#c73e48;
+  --carefur-danger-bg:#fdecee;
+  --carefur-warning:#8d650d;
+  --carefur-warning-bg:#fff5db;
+  --font-main:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:var(--font-main);
+  color:var(--carefur-text);
+  background:var(--carefur-background);
+  font-synthesis:none;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased
 }
+*{box-sizing:border-box}
+html,body,#root{margin:0;min-height:100%}
+body{min-height:100vh;background:linear-gradient(180deg,#fafbf7 0%,var(--carefur-background) 100%);color:var(--carefur-text)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(14,85,83,.18);outline-offset:2px}
+img{max-width:100%;display:block}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit}
+.page-alert{border-radius:13px;padding:11px 13px;margin:0 0 16px;font-size:.82rem}.page-alert--error{background:var(--carefur-danger-bg);color:#a72b37;border:1px solid #f2cbd0}.page-loading{min-height:180px;border:1px solid var(--carefur-border);border-radius:18px;background:#fff;display:grid;place-items:center;color:var(--carefur-muted);font-size:.86rem;box-shadow:0 10px 28px rgba(20,63,61,.035)}
 
-
-/* RESET */
-
-* {
-  box-sizing: border-box;
-}
-
-
-html,
-body {
-
-  margin:0;
-
-  min-height:100%;
-
-}
-
-
-body {
-
-  background:
-    var(--carefur-background);
-
-  color:
-    var(--carefur-text);
-
-}
-
-
-/* React root */
-
-#root {
-
-  min-height:100vh;
-
-}
-
-
-/* Global elements */
-
-button,
-input,
-textarea,
-select {
-
-  font:inherit;
-
-}
-
-
-button {
-
-  cursor:pointer;
-
-}
-
-
-img {
-
-  max-width:100%;
-
-  display:block;
-
-}
-
-
-h1,
-h2,
-h3,
-p {
-
-  margin:0;
-
-}
+/* 2026 CareFur readability pass */
+html{font-size:16px}
+body{font-size:1rem;line-height:1.45}
+.ui-page-description{font-size:.96rem;line-height:1.55}
+.page-alert{font-size:.9rem}
+.page-loading{font-size:.92rem}
+.segmented-control button{font-size:.84rem}

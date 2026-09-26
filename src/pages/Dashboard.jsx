@@ -57,7 +57,7 @@ export default function Dashboard() {
         </div>
 
         <Link
-          to="/notifications"
+          to="/alerts"
           className="notification-button"
           aria-label="Open notifications"
         >
@@ -76,17 +76,10 @@ export default function Dashboard() {
         className="dashboard-summary"
         aria-label="Today's summary"
       >
-        <SummaryItem
-          icon={PawPrint}
-          value={boardedPets}
-          label="Pets boarded"
-        />
-
-        <SummaryItem
-          icon={Clock}
-          value={totalFeedingsDue}
-          label="Feedings due"
-        />
+        <SummaryItem icon={PawPrint} value={boardedPets} label="Pets boarded" />
+        <SummaryItem icon={Clock} value={totalFeedingsDue} label="Feedings due" />
+        <SummaryItem icon={Camera} value={camerasOnline} label="Cameras online" />
+        <SummaryItem icon={WarningCircle} value={activeAlerts.length} label="Active alerts" />
       </section>
 
       {error && (
@@ -105,7 +98,7 @@ export default function Dashboard() {
         <div className="dashboard-sections">
           <DashboardSection
             title="Feedings Due Now"
-            link="/schedules"
+            link="/feeding-schedules"
             linkLabel="See all automatic feedings"
           >
             <FeedingList
@@ -117,7 +110,7 @@ export default function Dashboard() {
 
           <DashboardSection
             title="Manual Feedings Pending"
-            link="/schedules"
+            link="/feeding-schedules"
             linkLabel="See all manual feedings"
           >
             <FeedingList
@@ -129,7 +122,7 @@ export default function Dashboard() {
 
           <DashboardSection
             title="Active Alerts"
-            link="/notifications"
+            link="/alerts"
             linkLabel="See all alerts"
           >
             {activeAlerts.length > 0 ? (
@@ -152,7 +145,7 @@ export default function Dashboard() {
 
           <DashboardSection
             title="Camera Status"
-            link="/rooms"
+            link="/cameras"
             linkLabel="See all cameras"
           >
             <div className="camera-status-grid">
