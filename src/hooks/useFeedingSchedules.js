@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { supabase } from "../services/supabaseClient";
 
 export default function useFeedingSchedules(selectedDate = null) {
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [updatingId, setUpdatingId] = useState(null);
   const [error, setError] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
+
+  const refetchSchedules = useCallback(() => setRefreshKey((value) => value + 1), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -26,79 +29,63 @@ export default function useFeedingSchedules(selectedDate = null) {
             portion_grams,
             instructions,
             status,
-            bookings (
+            booking:bookings!feeding_schedules_booking_id_fkey (
               id,
               booking_code,
-              pets ( id, name, species, breed ),
-              rooms ( id, room_number, room_name )
+              pet:pets!bookings_pet_id_fkey (id, name, species, breed),
+              room:rooms!bookings_room_id_fkey (id, room_number, room_name)
             )
           `)
           .order("scheduled_at", { ascending: true });
 
         if (selectedDate) {
-          query = query
-            .gte("scheduled_at", `${selectedDate}T00:00:00`)
-            .lte("scheduled_at", `${selectedDate}T23:59:59`);
+          const start = new Date(`${selectedDate}T00:00:00`);
+          const end = new Date(`${selectedDate}T23:59:59.999`);
+          query = query.gte("scheduled_at", start.toISOString()).lte("scheduled_at", end.toISOString());
         }
 
         const { data, error: fetchError } = await query;
-
-        if (cancelled) return;
-
-        if (fetchError) {
-          throw fetchError;
-        }
-
-        setSchedules(data ?? []);
-      } catch (err) {
-        console.error("Failed to load feeding schedules:", err);
-        setSchedules([]);
-        setError("Unable to load feeding schedules.");
-      } finally {
+        if (fetchError) throw fetchError;
+        if (!cancelled) setSchedules(data ?? []);
+      } catch (fetchError) {
+        console.error("Failed to load feeding schedules:", fetchError);
         if (!cancelled) {
-          setLoading(false);
+          setSchedules([]);
+          setError(fetchError?.message || "Unable to load feeding schedules.");
         }
+      } finally {
+        if (!cancelled) setLoading(false);
       }
     }
 
     fetchSchedules();
-
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [selectedDate, refreshKey]);
 
-  async function toggleFeedingStatus(scheduleId, currentStatus) {
-    const newStatus = currentStatus === "completed" ? "pending" : "completed";
+  const toggleFeedingStatus = useCallback(async (scheduleId, currentStatus) => {
+    const nextStatus = currentStatus === "completed" ? "pending" : "completed";
+    setUpdatingId(scheduleId);
+    setError("");
 
     try {
-      const { error: updateError } = await supabase
+      const { data, error: updateError } = await supabase
         .from("feeding_schedules")
-        .update({ status: newStatus })
-        .eq("id", scheduleId);
+        .update({ status: nextStatus })
+        .eq("id", scheduleId)
+        .select("id, status")
+        .single();
 
       if (updateError) throw updateError;
-
-      setSchedules((prev) =>
-        prev.map((item) =>
-          item.id === scheduleId ? { ...item, status: newStatus } : item
-        )
-      );
-    } catch (err) {
-      console.error("Failed to update feeding status:", err);
-      setError("Failed to update status.");
+      setSchedules((items) => items.map((item) => item.id === scheduleId ? { ...item, status: data.status } : item));
+      return data;
+    } catch (updateError) {
+      console.error("Failed to update feeding status:", updateError);
+      setError(updateError?.message || "Failed to update feeding status.");
+      throw updateError;
+    } finally {
+      setUpdatingId(null);
     }
-  }
+  }, []);
 
-  function refetchSchedules() {
-    setRefreshKey((prev) => prev + 1);
-  }
-
-  return {
-    schedules,
-    loading,
-    error,
-    toggleFeedingStatus,
-    refetchSchedules,
-  };
+  return { schedules, loading, updatingId, error, toggleFeedingStatus, refetchSchedules };
 }
