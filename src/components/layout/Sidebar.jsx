@@ -4,6 +4,8 @@ import {
   CalendarPlus,
   Camera,
   ChatCircleDots,
+  ClipboardText,
+  GlobeHemisphereWest,
   ForkKnife,
   House,
   PawPrint,
@@ -19,13 +21,15 @@ import "./Sidebar.css";
 const navigation = [
   { label: "Dashboard", to: "/dashboard", icon: SquaresFour },
   { label: "New Boarding", to: "/boarding/new", icon: CalendarPlus },
+  { label: "Website Reservations", to: "/reservations", icon: ClipboardText },
   { label: "Boarding List", to: "/boardings", icon: CalendarCheck },
   { label: "Pets", to: "/pets", icon: PawPrint },
   { label: "Rooms", to: "/rooms", icon: House },
   { label: "Feeding", to: "/feeding-schedules", icon: ForkKnife },
   { label: "Cameras", to: "/cameras", icon: Camera },
   { label: "Alerts", to: "/alerts", icon: BellRinging },
-  { label: "Messages", to: "/messages", icon: ChatCircleDots },
+  { label: "App Messages", to: "/messages", icon: ChatCircleDots },
+  { label: "Website Inquiries", to: "/website-inquiries", icon: GlobeHemisphereWest },
   { label: "Staff", to: "/staff", icon: UsersThree, adminOnly: true },
 ];
 
