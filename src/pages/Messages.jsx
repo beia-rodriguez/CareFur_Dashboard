@@ -30,7 +30,7 @@ export default function Messages() {
 
   return (
     <section className="messages-page">
-      <PageHeader eyebrow="Communication" title="Messages" description="Keep boarding conversations organized with owner details and unread status." />
+      <PageHeader eyebrow="Owner App" title="App Messages" description="Boarding conversations from the CareFur owner app. Website inquiries are managed separately." />
       {error && <div className="page-alert page-alert--error">{error}</div>}
 
       <div className="messages-layout">

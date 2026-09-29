@@ -17,6 +17,8 @@ import Cameras from "./pages/Cameras";
 import Alerts from "./pages/Alerts";
 import Messages from "./pages/Messages";
 import StaffManagement from "./pages/StaffManagement";
+import ReservationRequests from "./pages/ReservationRequests";
+import WebsiteInquiries from "./pages/WebsiteInquiries";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -50,6 +52,8 @@ export default function App() {
         <Route path="/cameras" element={<Cameras />} />
         <Route path="/alerts" element={<Alerts />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/website-inquiries" element={<WebsiteInquiries />} />
+        <Route path="/reservations" element={<ReservationRequests />} />
 
         <Route
           path="/staff"

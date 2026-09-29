@@ -148,5 +148,33 @@ export default function useRooms(checkIn = null, checkOut = null) {
     };
   }, [checkIn, checkOut, refreshKey]);
 
-  return { rooms, loading, error, refetchRooms };
+  const createRoom = useCallback(async (payload) => {
+    setError("");
+    try {
+      const { error: insertError } = await supabase.from("rooms").insert(payload);
+      if (insertError) throw insertError;
+      refetchRooms();
+      return true;
+    } catch (mutationError) {
+      console.error("Create room error:", mutationError);
+      setError(mutationError?.message || "Unable to create room.");
+      return false;
+    }
+  }, [refetchRooms]);
+
+  const updateRoom = useCallback(async (roomId, payload) => {
+    setError("");
+    try {
+      const { error: updateError } = await supabase.from("rooms").update(payload).eq("id", roomId);
+      if (updateError) throw updateError;
+      refetchRooms();
+      return true;
+    } catch (mutationError) {
+      console.error("Update room error:", mutationError);
+      setError(mutationError?.message || "Unable to update room.");
+      return false;
+    }
+  }, [refetchRooms]);
+
+  return { rooms, loading, error, refetchRooms, createRoom, updateRoom };
 }
